@@ -54,7 +54,15 @@ class SiswaController extends Controller
 
     public function show(User $siswa)
     {   $pertanyaan = Pertanyaan::all();
-        return view('ppdb.admin.siswa.show_siswa', ['siswa' => $siswa, 'pertanyaan' => $pertanyaan]);
+        $status = Status::all();
+        return view('ppdb.admin.siswa.show_siswa', ['siswa' => $siswa, 'pertanyaan' => $pertanyaan, 'status' => $status]);
+    }
+
+    public function update(Request $request, User $siswa)
+    {
+        $siswa->status_id = $request->status_id;
+        $siswa->save();
+        return redirect()->back()->with('success', 'Sukses mengubah status siswa');
     }
 
     /**
@@ -68,10 +76,7 @@ class SiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
 
-    }
 
     /**
      * Remove the specified resource from storage.

@@ -5,7 +5,7 @@
         <div class="logo-header" data-background-color="dark">
           <a href="index.html" class="logo">
             <img
-              src="assets/img/kaiadmin/logo_light.svg"
+              src="{{ asset('logo-None-iain-madura-f1a016af.jpg')}}"
               alt="navbar brand"
               class="navbar-brand"
               height="20"
@@ -27,8 +27,8 @@
       </div>
       <!-- Navbar Header -->
       <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
-        {{-- <div class="container-fluid">
-          <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+        <div class="container-fluid">
+          {{-- <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
             <div class="input-group">
               <div class="input-group-prepend">
                 <button type="submit" class="btn btn-search pe-1">
@@ -41,7 +41,7 @@
                 class="form-control"
               />
             </div>
-          </nav>
+          </nav> --}}
 
           <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
             <li
@@ -69,7 +69,7 @@
                 </form>
               </ul>
             </li>
-            <li class="nav-item topbar-icon dropdown hidden-caret">
+            {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
               <a
                 class="nav-link dropdown-toggle"
                 href="#"
@@ -83,8 +83,7 @@
               </a>
               <ul
                 class="dropdown-menu messages-notif-box animated fadeIn"
-                aria-labelledby="messageDropdown"
-              >
+                aria-labelledby="messageDropdown">
                 <li>
                   <div
                     class="dropdown-title d-flex justify-content-between align-items-center"
@@ -159,8 +158,8 @@
                   </a>
                 </li>
               </ul>
-            </li>
-            <li class="nav-item topbar-icon dropdown hidden-caret">
+            </li> --}}
+            {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
               <a
                 class="nav-link dropdown-toggle"
                 href="#"
@@ -237,8 +236,8 @@
                   </a>
                 </li>
               </ul>
-            </li>
-            <li class="nav-item topbar-icon dropdown hidden-caret">
+            </li> --}}
+            {{-- <li class="nav-item topbar-icon dropdown hidden-caret">
               <a
                 class="nav-link"
                 data-bs-toggle="dropdown"
@@ -315,7 +314,7 @@
                   </div>
                 </div>
               </div>
-            </li>
+            </li> --}}
 
             <li class="nav-item topbar-user dropdown hidden-caret">
               <a
@@ -326,14 +325,14 @@
               >
                 <div class="avatar-sm">
                   <img
-                    src="assets/img/profile.jpg"
+                    src="{{ asset('storage/' . auth()->user()->profile) }}"
                     alt="..."
                     class="avatar-img rounded-circle"
                   />
                 </div>
                 <span class="profile-username">
                   <span class="op-7">Hi,</span>
-                  <span class="fw-bold">Hizrian</span>
+                  <span class="fw-bold">{{ auth()->user()->name }}</span>
                 </span>
               </a>
               <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -342,14 +341,14 @@
                     <div class="user-box">
                       <div class="avatar-lg">
                         <img
-                          src="assets/img/profile.jpg"
+                          src="{{ asset('storage/' . auth()->user()->profile) }}"
                           alt="image profile"
                           class="avatar-img rounded"
                         />
                       </div>
                       <div class="u-text">
-                        <h4>Hizrian</h4>
-                        <p class="text-muted">hello@example.com</p>
+                        <h4>{{ auth()->user()->name }}</h4>
+                        <p class="text-muted">{{ auth()->user()->email }}</p>
                         <a
                           href="profile.html"
                           class="btn btn-xs btn-secondary btn-sm"
@@ -360,19 +359,23 @@
                   </li>
                   <li>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">My Profile</a>
+                    {{-- <a class="dropdown-item" href="#">My Profile</a>
                     <a class="dropdown-item" href="#">My Balance</a>
                     <a class="dropdown-item" href="#">Inbox</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Account Setting</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <div class="dropdown-divider"></div> --}}
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="dropdown-item text-danger" type="submit" >Logout</button>
+                    </form>
+
                   </li>
                 </div>
               </ul>
             </li>
           </ul>
-        </div> --}}
+        </div>
       </nav>
       <!-- End Navbar -->
     </div>

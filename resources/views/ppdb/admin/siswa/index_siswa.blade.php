@@ -107,13 +107,17 @@
 
 @section('scripts')
 <script>
-    $(document).ready(function () {
-        $("#basic-datatables").DataTable();
-
-        // Select All Checkbox
-        $("#selectAll").click(function () {
-            $("input[name='selected_ids[]']").prop("checked", this.checked);
-        });
+$(document).ready(function () {
+    $("#basic-datatables").DataTable({
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+        "pageLength": 10 // Default jumlah data yang ditampilkan
     });
+
+    // Select All Checkbox
+    $("#selectAll").click(function () {
+        $("input[name='selected_ids[]']").prop("checked", this.checked);
+    });
+});
+
 </script>
 @endsection

@@ -14,6 +14,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    $user = Auth::user();
+    if ($user->is_admin == 1) {
+        return redirect()->route('siswa.index');
+    } else {
+        return redirect()->route('profile.index');
+    }
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

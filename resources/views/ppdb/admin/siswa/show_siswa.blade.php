@@ -54,9 +54,28 @@
                             <i class="bi bi-telephone me-2"></i>{{ $siswa->telp }}
                         </div>
                         <div class="px-3 py-2 bg-light rounded-3">
-                            <i class="bi bi-person-badge me-2"></i>Status: {{ $siswa->status->tipe }}
+                            <i class="bi bi-person-badge me-2"></i>Status Seleksi: {{ $siswa->status->tipe }}
                         </div>
                     </div>
+
+                    <!-- Form Ubah Status -->
+                    <form action="{{ route('siswa.update', $siswa->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-3">
+                            <label for="status_id" class="form-label fw-bold">Ubah Status</label>
+                            <select name="status_id" id="status_id" class="form-select">
+                                @foreach($status as $stat)
+                                    <option value="{{ $stat->id }}" {{ $siswa->status_id == $stat->id ? 'selected' : '' }}>
+                                        {{ $stat->tipe }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-save me-2"></i>Simpan Perubahan
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -82,7 +101,6 @@
                                     <th class="px-4">#</th>
                                     <th>Pertanyaan</th>
                                     <th>Jawaban</th>
-                                    <th>Tanggal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -92,7 +110,7 @@
                                     @endphp
                                     <tr>
                                         <td class="px-4">{{ $key + 1 }}</td>
-                                        <td>{{ $pertanyaanItem->pertanyaan }}</td>
+                                        <td>{!! $pertanyaanItem->pertanyaan !!}</td>
                                         <td>
                                             @if($jawabanSiswa)
                                                 @if(Str::startsWith($jawabanSiswa->jawaban, 'siswa/berkas/'))
@@ -112,16 +130,6 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td>
-                                            @if($jawabanSiswa)
-                                                <span class="text-muted" title="{{ \Carbon\Carbon::parse($jawabanSiswa->created_at)->format('d-m-Y H:i') }}">
-                                                    <i class="bi bi-clock me-2"></i>
-                                                    {{ \Carbon\Carbon::parse($jawabanSiswa->created_at)->format('d F Y') }}
-                                                </span>
-                                            @else
-                                                <span class="text-muted">-</span>
-                                            @endif
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -132,24 +140,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-<style>
-    .page-inner {
-        background-color: #f8f9fa;
-    }
-    .card {
-        transition: all 0.3s ease;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-    }
-</style>
-
-@section('scripts')
-<script>
-    $(document).ready(function () {
-      $("#basic-datatables").DataTable({});
-    });
-  </script>
 @endsection

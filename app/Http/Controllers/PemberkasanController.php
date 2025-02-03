@@ -52,24 +52,32 @@ class PemberkasanController extends Controller
 
     public function show(Pertanyaan $pemberkasan)
     {
-
         return view('ppdb.user.pemberkasan.create_pemberkasan', ['pemberkasan' => $pemberkasan]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Jawaban $pemberkasan)
     {
-        //
+        $pemberkasan->load('pertanyaan');
+        return view('ppdb.user.pemberkasan.edit_pemberkasan', ['jawaban' => $pemberkasan]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(JawabanRequest $request, Jawaban $pemberkasan)
     {
-        //
+        $userId = Auth::id();
+        $data = $request->all();
+        $data['user_id'] = $userId;
+
+        if ($request->hasFile('jawaban')) {
+            $filePath = $request->file('jawaban')->store('siswa/berkas', 'public');
+            $data['jawaban'] = $filePath;
+        }
+
+        $pemberkasan->update($data);
+
+        return redirect()->route('pemberkasan.index')->with('success', 'Jawaban berhasil diubah');
     }
 
     /**

@@ -170,7 +170,7 @@
                                             @endphp
                                             <tr>
                                                 <td class="px-4">{{ $key + 1 }}</td>
-                                                <td>{{ $pertanyaanItem->pertanyaan }}</td>
+                                                <td>{!! $pertanyaanItem->pertanyaan !!}</td>
                                                 <td>
                                                     @if($jawabanSiswa)
                                                         @if(Str::startsWith($jawabanSiswa->jawaban, 'siswa/berkas/'))

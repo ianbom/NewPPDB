@@ -1,14 +1,33 @@
 <!-- Sidebar -->
-<div class="sidebar" data-background-color="dark">
+
+<style>
+    .sidebar {
+    color: white !important;
+}
+
+.sidebar a {
+    color: white !important;
+}
+
+.sidebar a:hover {
+    color: #ddd !important; /* Warna hover agar lebih soft */
+}
+
+.text-section {
+    color: white !important;
+}
+
+</style>
+<div class="sidebar " style="background: linear-gradient(to bottom, #172c18, #0a650d)">
     <div class="sidebar-logo">
       <!-- Logo Header -->
-      <div class="logo-header" data-background-color="dark">
-        <a href="index.html" class="logo">
+      <div class="logo-header" >
+        <a href="#" class="logo">
           <img
-            src="assets/img/kaiadmin/logo_light.svg"
+            src="{{ asset('logo-None-iain-madura-f1a016af.jpg') }}"
             alt="navbar brand"
             class="navbar-brand"
-            height="20"
+            height="50"
           />
         </a>
         <div class="nav-toggle">
@@ -28,7 +47,7 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
       <div class="sidebar-content">
         <ul class="nav nav-secondary">
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a
               data-bs-toggle="collapse"
               href="#dashboard"
@@ -36,7 +55,7 @@
               aria-expanded="false"
             >
               <i class="bi bi-house"></i>
-              <p>Dashboard</p>
+              <p class="text-white">Dashboard</p>
               <span class="caret"></span>
             </a>
             <div class="collapse" id="dashboard">

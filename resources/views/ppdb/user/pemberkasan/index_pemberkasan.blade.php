@@ -25,26 +25,51 @@
         </ul>
     </div>
 
-    <div class="row">
-        @foreach ($pertanyaan as $item)
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title fw-bold">{!! $item->pertanyaan !!}</h5>
-                </div>
-                <div class="card-body">
-                    <p><strong>Jawaban Anda:</strong>
-                        @if(isset($jawaban[$item->id]))
-                            <span class="badge bg-success">{{ $jawaban[$item->id]->jawaban }}</span>
-                        @else
-                            <a href="{{ route('pemberkasan.show', $item->id) }}" class="btn btn-sm btn-info"> Tambah Jawaban </a>
-                        @endif
-                    </p>
-                </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="basic-datatables" class="table table-bordered table-striped">
+                    <thead class="">
+                        <tr>
+                            <th>No</th>
+                            <th>Pertanyaan</th>
+                            <th>Status Jawaban</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pertanyaan as $index => $item)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{!! $item->pertanyaan !!}</td>
+                            <td>
+                                @if(isset($jawaban[$item->id]))
+                                    <span class="badge bg-success">Sudah dijawab</span>
+                                @else
+                                    <span class="badge bg-secondary">Belum dijawab</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if(isset($jawaban[$item->id]))
+                                    <a href="{{ route('pemberkasan.edit', $jawaban[$item->id]) }}" class="btn btn-outline-secondary btn-sm">Edit</a>
+                                @else
+                                    <a href="{{ route('pemberkasan.show', $item->id) }}" class="btn btn-primary btn-sm">Jawab</a>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-        @endforeach
     </div>
-
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function () {
+      $("#basic-datatables").DataTable({});
+    });
+  </script>
 @endsection
