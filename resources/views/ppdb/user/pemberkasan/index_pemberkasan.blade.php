@@ -7,20 +7,20 @@
         <ul class="breadcrumbs mb-3">
             <li class="nav-home">
                 <a href="#">
-                    <i class="bi bi-house"></i>
+                    <i class="bi bi-archive"></i>
                 </a>
             </li>
             <li class="separator">
-                <i class="icon-arrow-right"></i>
+                <i class="bi bi-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Pemberkasan</a>
+                <a href="#">Tables</a>
             </li>
             <li class="separator">
-                <i class="icon-arrow-right"></i>
+                <i class="bi bi-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Daftar Pertanyaan</a>
+                <a href="#">Data Pertanyaan</a>
             </li>
         </ul>
     </div>
@@ -41,7 +41,7 @@
                         @foreach ($pertanyaan as $index => $item)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{!! $item->pertanyaan !!}</td>
+                            <td>{{$item->pertanyaan }}</td>
                             <td>
                                 @if(isset($jawaban[$item->id]))
                                     <span class="badge bg-success">Sudah dijawab</span>

@@ -7,6 +7,7 @@ use App\Models\Pertanyaan;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class SiswaController extends Controller
 {
@@ -16,7 +17,7 @@ class SiswaController extends Controller
     public function index()
     {
         $status = Status::all();
-        $siswa = User::all();
+        $siswa = User::where('is_admin', false)->get();
         return view('ppdb.admin.siswa.index_siswa', ['siswa' => $siswa, 'status'=>$status]);
     }
 
@@ -36,6 +37,13 @@ class SiswaController extends Controller
         return response()->json(['err' => $th->getMessage()]);
     }
 }
+
+    public function generatePdf(Request $request){
+
+        $siswa = User::where('status_id', $request->status_id)->get();
+        $pdf = PDF::loadView('ppdb.admin.siswa.pdf_siswa', ['siswa' => $siswa]);
+        return $pdf->download('hasil-selesi.pdf');
+    }
 
 
     public function create()

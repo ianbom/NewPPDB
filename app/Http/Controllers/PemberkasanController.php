@@ -37,6 +37,13 @@ class PemberkasanController extends Controller
             $userId = Auth::id();
             $data = $request->all();
             $data['user_id'] = $userId;
+
+
+            if (is_array($request->jawaban)) {
+                $data['jawaban'] = json_encode($request->jawaban);
+            }
+
+
             if ($request->hasFile('jawaban')) {
                 $filePath = $request->file('jawaban')->store('siswa/berkas', 'public');
                 $data['jawaban'] = $filePath;
@@ -48,6 +55,7 @@ class PemberkasanController extends Controller
             return response()->json(['error' => $th->getMessage()]);
         }
     }
+
 
 
     public function show(Pertanyaan $pemberkasan)
@@ -66,16 +74,22 @@ class PemberkasanController extends Controller
 
     public function update(JawabanRequest $request, Jawaban $pemberkasan)
     {
-        $userId = Auth::id();
-        $data = $request->all();
-        $data['user_id'] = $userId;
 
-        if ($request->hasFile('jawaban')) {
-            $filePath = $request->file('jawaban')->store('siswa/berkas', 'public');
-            $data['jawaban'] = $filePath;
+        if (!$request->jawaban && $pemberkasan->pertanyaan->tipe == 'checkbox') {
+           $pemberkasan->delete();
+        } else {
+            $userId = Auth::id();
+            $data = $request->all();
+            $data['user_id'] = $userId;
+
+            if ($request->hasFile('jawaban')) {
+                $filePath = $request->file('jawaban')->store('siswa/berkas', 'public');
+                $data['jawaban'] = $filePath;
+            }
+
+            $pemberkasan->update($data);
         }
 
-        $pemberkasan->update($data);
 
         return redirect()->route('pemberkasan.index')->with('success', 'Jawaban berhasil diubah');
     }

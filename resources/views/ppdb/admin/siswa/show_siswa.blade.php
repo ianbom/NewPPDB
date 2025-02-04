@@ -1,25 +1,11 @@
 @extends('ppdb.admin.layout.admin_app')
 
 @section('content')
-<div class="page-inner px-4">
-    <!-- Header Section -->
+<div class="page-inner">
     <div class="page-header d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h2 class="fw-bold">Detail Siswa</h2>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent p-0">
-                    <li class="breadcrumb-item">
-                        <a href="#" class="text-decoration-none">
-                            <i class="bi bi-house-door"></i>
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="#" class="text-decoration-none">Siswa</a>
-                    </li>
-                    <li class="breadcrumb-item active">Detail Siswa</li>
-                </ol>
-            </nav>
-        </div>
+        <h3 class="fw-bold mb-3">Data Siswa</h3>
+
+
         <a href="{{ route('siswa.index') }}" class="btn btn-outline-primary">
             <i class="bi bi-arrow-left me-2"></i>Kembali
         </a>
@@ -31,9 +17,9 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-body text-center p-4">
                     <div class="position-relative mb-4 d-flex justify-content-center">
-                        @if($siswa->profile && Storage::exists('public/' . $siswa->profile))
+                        @if($siswa->profile )
                             <img src="{{ asset('storage/' . $siswa->profile) }}"
-                                 class="img-fluid rounded-circle border border-4 border-white shadow"
+                                 class="img-fluid border border-2 border-dark shadow"
                                  width="180" height="180"
                                  alt="{{ $siswa->name }}">
                         @else
@@ -51,10 +37,10 @@
                     </p>
                     <div class="d-flex justify-content-center gap-3 mb-3">
                         <div class="px-3 py-2 bg-light rounded-3">
-                            <i class="bi bi-telephone me-2"></i>{{ $siswa->telp }}
+                            <i class="bi bi-telephone me-2"></i>{{ $siswa->telp ?? '-'}}
                         </div>
                         <div class="px-3 py-2 bg-light rounded-3">
-                            <i class="bi bi-person-badge me-2"></i>Status Seleksi: {{ $siswa->status->tipe }}
+                            <i class="bi bi-person-badge me-2"></i>Status Seleksi: {{ $siswa->status->tipe ?? 'Belum verifikasi' }}
                         </div>
                     </div>
 
@@ -110,7 +96,7 @@
                                     @endphp
                                     <tr>
                                         <td class="px-4">{{ $key + 1 }}</td>
-                                        <td>{!! $pertanyaanItem->pertanyaan !!}</td>
+                                        <td>{{ $pertanyaanItem->pertanyaan }}</td>
                                         <td>
                                             @if($jawabanSiswa)
                                                 @if(Str::startsWith($jawabanSiswa->jawaban, 'siswa/berkas/'))

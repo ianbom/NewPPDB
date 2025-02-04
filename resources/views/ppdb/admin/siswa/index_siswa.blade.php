@@ -47,6 +47,22 @@
                     <h4 class="card-title">Daftar Siswa</h4>
                 </div>
                 <div class="card-body">
+
+                    <div class="d-flex align-items-center mb-3">
+                        <form action="{{ route('siswa.genratePdf') }}" method="GET" class="d-flex align-items-center">
+                            <select name="status_id" class="form-select w-auto me-2" required>
+                                <option value="">Pilih Status</option>
+                                <option value="">Belum Verifikasi</option>
+                                @foreach($status as $st)
+                                    <option value="{{ $st->id }}">{{ ucfirst($st->tipe) }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="bi bi-file-earmark-pdf"></i> Export PDF
+                            </button>
+                        </form>
+                    </div>
+
                     <form id="bulkUpdateForm" action="{{ route('siswa.bulkUpdateStatus') }}" method="POST">
                         @csrf
                         <div class="d-flex align-items-center mb-3">

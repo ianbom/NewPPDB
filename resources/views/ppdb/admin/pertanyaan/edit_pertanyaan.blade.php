@@ -7,17 +7,17 @@
         <ul class="breadcrumbs mb-3">
             <li class="nav-home">
                 <a href="#">
-                    <i class="icon-home"></i>
+                    <i class="bi bi-book-half"></i>
                 </a>
             </li>
             <li class="separator">
-                <i class="icon-arrow-right"></i>
+                <i class="bi bi-arrow-right"></i>
             </li>
             <li class="nav-item">
                 <a href="#">Pertanyaan</a>
             </li>
             <li class="separator">
-                <i class="icon-arrow-right"></i>
+                <i class="bi bi-arrow-right"></i>
             </li>
             <li class="nav-item">
                 <a href="#">Edit Pertanyaan</a>
@@ -34,6 +34,7 @@
                     <form action="{{ route('pertanyaan.update', $pertanyaan->id) }}" method="POST">
                         @csrf
                         @method('PUT')
+
                         <div class="form-group">
                             <label for="tipe">Tipe Pertanyaan</label>
                             <select class="form-control" name="tipe" id="tipe" required>
@@ -42,13 +43,22 @@
                                 <option value="date" {{ $pertanyaan->tipe == 'date' ? 'selected' : '' }}>Tanggal</option>
                                 <option value="file" {{ $pertanyaan->tipe == 'file' ? 'selected' : '' }}>File Upload</option>
                                 <option value="radio" {{ $pertanyaan->tipe == 'radio' ? 'selected' : '' }}>Radio</option>
+                                <option value="checkbox" {{ $pertanyaan->tipe == 'checkbox' ? 'selected' : '' }}>Checkbox</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="editor">Pertanyaan</label>
-                            <div id="editor" style="height: 200px;"></div>
-                            <input type="hidden" name="pertanyaan" id="pertanyaan_hidden" value="{{ $pertanyaan->pertanyaan }}">
+                            <label for="pertanyaan">Pertanyaan</label>
+                            <textarea class="form-control" name="pertanyaan" id="pertanyaan" rows="3" required>{{ $pertanyaan->pertanyaan }}</textarea>
+                        </div>
+
+                        <div id="opsi-container" style="display: {{ in_array($pertanyaan->tipe, ['radio', 'checkbox']) ? 'block' : 'none' }};">
+                            <label>Opsi Jawaban (Opsional)</label>
+                            <input type="text" class="form-control mb-2" name="opsi_A" placeholder="Opsi A" value="{{ $pertanyaan->opsi_A }}">
+                            <input type="text" class="form-control mb-2" name="opsi_B" placeholder="Opsi B" value="{{ $pertanyaan->opsi_B }}">
+                            <input type="text" class="form-control mb-2" name="opsi_C" placeholder="Opsi C" value="{{ $pertanyaan->opsi_C }}">
+                            <input type="text" class="form-control mb-2" name="opsi_D" placeholder="Opsi D" value="{{ $pertanyaan->opsi_D }}">
+                            <input type="text" class="form-control mb-2" name="opsi_E" placeholder="Opsi E" value="{{ $pertanyaan->opsi_E }}">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
@@ -63,37 +73,17 @@
 
 @section('scripts')
 <script>
-    // Inisialisasi Quill
-    var quill = new Quill('#editor', {
-        theme: 'snow',
-        modules: {
-            toolbar: [
-                ['bold', 'italic', 'underline', 'strike'],
-                ['blockquote', 'code-block'],
-                [{ 'header': 1 }, { 'header': 2 }],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                [{ 'indent': '-1'}, { 'indent': '+1' }],
-                ['clean']
-            ]
-        }
-    });
+    document.addEventListener("DOMContentLoaded", function () {
+        let tipeSelect = document.getElementById("tipe");
+        let opsiContainer = document.getElementById("opsi-container");
 
-    // Set nilai awal editor dari data yang ada
-    quill.root.innerHTML = {!! json_encode($pertanyaan->pertanyaan) !!};
-
-    // Set nilai awal hidden input
-    document.getElementById('pertanyaan_hidden').value = quill.root.innerHTML;
-
-    // Update hidden input sebelum form disubmit
-    document.querySelector('form').addEventListener('submit', function() {
-        var content = quill.root.innerHTML;
-        document.getElementById('pertanyaan_hidden').value = content;
-    });
-
-    // Optional: Update hidden input saat content berubah
-    quill.on('text-change', function() {
-        var content = quill.root.innerHTML;
-        document.getElementById('pertanyaan_hidden').value = content;
+        tipeSelect.addEventListener("change", function () {
+            if (this.value === "radio" || this.value === "checkbox") {
+                opsiContainer.style.display = "block";
+            } else {
+                opsiContainer.style.display = "none";
+            }
+        });
     });
 </script>
 @endsection

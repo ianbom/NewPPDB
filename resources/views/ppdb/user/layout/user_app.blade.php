@@ -59,7 +59,6 @@
 
         @include('ppdb.user.layout.header')
 
-        @include('ppdb.admin.layout.customize')
     </div>
 
 

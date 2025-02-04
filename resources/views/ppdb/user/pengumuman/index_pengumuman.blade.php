@@ -38,7 +38,7 @@
                             </div>
                             <h4 class="fw-bold text-warning mb-3">{{ $user->status->judul }}</h4>
                             <div class="text-muted">
-                                {!! nl2br(e($user->status->deskripsi)) !!}
+                                {{ nl2br(e($user->status->deskripsi)) }}
                             </div>
                             <div class="alert alert-warning mt-4">
                                 <i class="bi bi-info-circle-fill me-2"></i>
@@ -54,7 +54,7 @@
                             </div>
                             <h4 class="fw-bold text-info mb-3">{{ $user->status->judul }}</h4>
                             <div class="text-muted">
-                                {!! nl2br(e($user->status->deskripsi)) !!}
+                                {{ nl2br(e($user->status->deskripsi)) }}
                             </div>
                             <div class="alert alert-info mt-4">
                                 <i class="bi bi-info-circle-fill me-2"></i>
@@ -70,7 +70,7 @@
                             </div>
                             <h4 class="fw-bold text-success mb-3">{{ $user->status->judul }}</h4>
                             <div class="text-muted">
-                                {!! nl2br(e($user->status->deskripsi)) !!}
+                                {{ nl2br(e($user->status->deskripsi)) }}
                             </div>
                             <div class="alert alert-success mt-4">
                                 <i class="bi bi-trophy-fill me-2"></i>
@@ -90,13 +90,13 @@
                             </div>
                             <h4 class="fw-bold text-danger mb-3">{{ $user->status->judul }}</h4>
                             <div class="text-muted mb-4">
-                                {!! nl2br(e($user->status->deskripsi)) !!}
+                                {{ nl2br(e($user->status->deskripsi)) }}
                             </div>
                             <div class="alert alert-danger">
                                 <i class="bi bi-exclamation-circle-fill me-2"></i>
                                 Mohon maaf, Anda belum memenuhi kriteria yang ditentukan.
                             </div>
-                        
+
                         </div>
                         @endif
                     @else

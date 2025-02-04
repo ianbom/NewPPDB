@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'Ale',
-            'telp' => '01234567',
+            'telp' => '0856363453',
             'profile' => 'profile.png',
             'email' => 'ale@gmail.com',
             'password' => Hash::make('aleale123')
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'IanBom',
-            'telp' => '0987654',
+            'telp' => '08123462432',
             'profile' => 'profile.png',
             'email' => 'ianbom@gmail.com',
             'password' => Hash::make('ianbom123')

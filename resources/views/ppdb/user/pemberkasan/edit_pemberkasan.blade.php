@@ -4,24 +4,24 @@
 
 <div class="page-inner">
     <div class="page-header">
-        <h3 class="fw-bold mb-3">Edit Jawaban Pemberkasan</h3>
+        <h3 class="fw-bold mb-3">Edit Pertanyaan</h3>
         <ul class="breadcrumbs mb-3">
             <li class="nav-home">
                 <a href="#">
-                    <i class="icon-home"></i>
+                    <i class="bi bi-archive"></i>
                 </a>
             </li>
             <li class="separator">
-                <i class="icon-arrow-right"></i>
+                <i class="bi bi-arrow-right"></i>
             </li>
             <li class="nav-item">
                 <a href="#">Pemberkasan</a>
             </li>
             <li class="separator">
-                <i class="icon-arrow-right"></i>
+                <i class="bi bi-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Edit Jawaban</a>
+                <a href="#">Edit Pertanyaan</a>
             </li>
         </ul>
     </div>
@@ -42,7 +42,7 @@
 
                         <div class="form-group">
                             <label for="pertanyaan">Pertanyaan</label>
-                            <p class="fw-bold">{!! $jawaban->pertanyaan->pertanyaan !!}</p>
+                            <p class="fw-bold">{{ $jawaban->pertanyaan->pertanyaan }}</p>
                         </div>
 
                         <div class="form-group">
@@ -61,14 +61,33 @@
                                 @endif
 
                             @elseif($jawaban->pertanyaan->tipe == 'radio')
-                                <input type="text" class="form-control" name="jawaban" value="{{ $jawaban->jawaban }}" required>
+                                @foreach(['A', 'B', 'C', 'D', 'E'] as $opsi)
+                                    @php $opsiKey = 'opsi_' . $opsi; @endphp
+                                    @if(!empty($jawaban->pertanyaan->$opsiKey))
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="jawaban" value="{{ $jawaban->pertanyaan->$opsiKey }}" {{ $jawaban->jawaban == $jawaban->pertanyaan->$opsiKey ? 'checked' : '' }} required>
+                                            <label class="form-check-label">{{ $jawaban->pertanyaan->$opsiKey }}</label>
+                                        </div>
+                                    @endif
+                                @endforeach
+
+                            @elseif($jawaban->pertanyaan->tipe == 'checkbox')
+                                @php $selectedJawaban = json_decode($jawaban->jawaban, true) ?? []; @endphp
+                                @foreach(['A', 'B', 'C', 'D', 'E'] as $opsi)
+                                    @php $opsiKey = 'opsi_' . $opsi; @endphp
+                                    @if(!empty($jawaban->pertanyaan->$opsiKey))
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="jawaban[]" value="{{ $jawaban->pertanyaan->$opsiKey }}" {{ in_array($jawaban->pertanyaan->$opsiKey, $selectedJawaban) ? 'checked' : '' }}>
+                                            <label class="form-check-label">{{ $jawaban->pertanyaan->$opsiKey }}</label>
+                                        </div>
+                                    @endif
+                                @endforeach
                             @endif
                         </div>
 
                         <button type="submit" class="btn btn-primary">Update Jawaban</button>
                         <a href="{{ route('pemberkasan.index') }}" class="btn btn-secondary">Batal</a>
                     </form>
-
                 </div>
             </div>
         </div>

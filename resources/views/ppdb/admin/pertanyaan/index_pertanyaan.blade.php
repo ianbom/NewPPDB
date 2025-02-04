@@ -7,20 +7,20 @@
         <ul class="breadcrumbs mb-3">
             <li class="nav-home">
                 <a href="#">
-                    <i class="icon-home"></i>
+                    <i class="bi bi-book-half"></i>
                 </a>
             </li>
             <li class="separator">
-                <i class="icon-arrow-right"></i>
+                <i class="bi bi-arrow-right"></i>
             </li>
             <li class="nav-item">
                 <a href="#">Tables</a>
             </li>
             <li class="separator">
-                <i class="icon-arrow-right"></i>
+                <i class="bi bi-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Datatables</a>
+                <a href="#">Data Pertanyaan</a>
             </li>
         </ul>
     </div>
@@ -62,7 +62,7 @@
                                 <tr>
                                     <td>{{ $p->id }}</td>
                                     <td>{{ $p->tipe }}</td>
-                                    <td>{!! $p->pertanyaan !!}</td>
+                                    <td>{{ $p->pertanyaan }}</td>
 
                                     <td>
                                         <a href="{{ route('pertanyaan.edit', $p->id) }}" class="btn btn-warning btn-sm">Edit</a>

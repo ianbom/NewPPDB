@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PertanyaanController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\StatusController;
@@ -29,9 +30,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::group(['prefix' => 'admin'], function () {
+    Route::resource('dashboard', DashboardController::class);
     Route::resource('pertanyaan', PertanyaanController::class);
     Route::resource('status', StatusController::class);
     Route::resource('siswa', SiswaController::class);
+    Route::get('generate/pdfSiswa', [SiswaController::class, 'generatePdf'])->name('siswa.genratePdf');
     Route::post('bulk/update/siswa', [SiswaController::class, 'bulkUpdateStatus'])->name('siswa.bulkUpdateStatus');
 
 });

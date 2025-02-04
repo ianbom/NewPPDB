@@ -40,6 +40,7 @@
                                 <option value="verifikasi" {{ $status->tipe == 'verifikasi' ? 'selected' : '' }}>Verifikasi</option>
                                 <option value="administrasi" {{ $status->tipe == 'administrasi' ? 'selected' : '' }}>Administrasi</option>
                                 <option value="lolos" {{ $status->tipe == 'lolos' ? 'selected' : '' }}>Lolos</option>
+                                <option value="ditolak" {{ $status->tipe == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
                             </select>
                         </div>
 

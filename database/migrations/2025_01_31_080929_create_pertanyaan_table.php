@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('pertanyaan', function (Blueprint $table) {
             $table->id();
-            $table->enum('tipe', ['text', 'date', 'file', 'radio']);
+            $table->enum('tipe', ['text', 'date', 'file', 'radio', 'checkbox']);
             $table->text('pertanyaan');
+            $table->string('opsi_A')->nullable();
+            $table->string('opsi_B')->nullable();
+            $table->string('opsi_C')->nullable();
+            $table->string('opsi_D')->nullable();
+            $table->string('opsi_E')->nullable();
             $table->timestamps();
         });
     }

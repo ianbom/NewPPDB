@@ -1,8 +1,27 @@
 <!-- Sidebar -->
-<div class="sidebar" data-background-color="dark">
+
+<style>
+    .sidebar {
+    color: white !important;
+}
+
+.sidebar a {
+    color: white !important;
+}
+
+.sidebar a:hover {
+    color: #ddd !important; /* Warna hover agar lebih soft */
+}
+
+.text-section {
+    color: white !important;
+}
+</style>
+
+<div class="sidebar"style="background: linear-gradient(to bottom, #172c18, #0a650d)">
     <div class="sidebar-logo">
       <!-- Logo Header -->
-      <div class="logo-header" data-background-color="dark">
+      <div class="logo-header">
         <a href="#" class="logo">
           <img
             src="{{ asset('logo-None-iain-madura-f1a016af.jpg') }}"
@@ -28,7 +47,7 @@
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
       <div class="sidebar-content">
         <ul class="nav nav-secondary">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a
               data-bs-toggle="collapse"
               href="#profile"

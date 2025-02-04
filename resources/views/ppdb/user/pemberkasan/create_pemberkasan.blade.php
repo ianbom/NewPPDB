@@ -4,24 +4,24 @@
 
 <div class="page-inner">
     <div class="page-header">
-        <h3 class="fw-bold mb-3">Jawaban Pemberkasan</h3>
+        <h3 class="fw-bold mb-3">Input Pemberkasan</h3>
         <ul class="breadcrumbs mb-3">
             <li class="nav-home">
                 <a href="#">
-                    <i class="icon-home"></i>
+                    <i class="bi bi-archive"></i>
                 </a>
             </li>
             <li class="separator">
-                <i class="icon-arrow-right"></i>
+                <i class="bi bi-arrow-right"></i>
             </li>
             <li class="nav-item">
                 <a href="#">Pemberkasan</a>
             </li>
             <li class="separator">
-                <i class="icon-arrow-right"></i>
+                <i class="bi bi-arrow-right"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Jawaban Pemberkasan</a>
+                <a href="#">Input Data</a>
             </li>
         </ul>
     </div>
@@ -35,12 +35,11 @@
                 <div class="card-body">
                     <form action="{{ route('pemberkasan.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <!-- Hidden input untuk pertanyaan_id -->
                         <input type="hidden" name="pertanyaan_id" value="{{ $pemberkasan->id }}">
 
                         <div class="form-group">
-                            <label for="pertanyaan">Pertanyaan co</label>
-                            <span>{!! $pemberkasan->pertanyaan !!}</span>
+                            <label for="pertanyaan">Pertanyaan</label>
+                            <p><strong>{{ $pemberkasan->pertanyaan }}</strong></p>
                         </div>
 
                         <div class="form-group">
@@ -56,14 +55,32 @@
                                 <input type="file" class="form-control" name="jawaban" required>
 
                             @elseif($pemberkasan->tipe == 'radio')
-                                <input type="text" class="form-control" name="jawaban" placeholder="Masukkan pilihan jawaban" required>
+                                @foreach(['A', 'B', 'C', 'D', 'E'] as $opsi)
+                                    @php $opsiKey = 'opsi_' . $opsi; @endphp
+                                    @if(!empty($pemberkasan->$opsiKey))
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="jawaban" value="{{ $pemberkasan->$opsiKey }}" required>
+                                            <label class="form-check-label">{{ $pemberkasan->$opsiKey }}</label>
+                                        </div>
+                                    @endif
+                                @endforeach
+
+                            @elseif($pemberkasan->tipe == 'checkbox')
+                                @foreach(['A', 'B', 'C', 'D', 'E'] as $opsi)
+                                    @php $opsiKey = 'opsi_' . $opsi; @endphp
+                                    @if(!empty($pemberkasan->$opsiKey))
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="jawaban[]" value="{{ $pemberkasan->$opsiKey }}">
+                                            <label class="form-check-label">{{ $pemberkasan->$opsiKey }}</label>
+                                        </div>
+                                    @endif
+                                @endforeach
                             @endif
                         </div>
 
                         <button type="submit" class="btn btn-primary">Simpan</button>
                         <a href="{{ route('pemberkasan.index') }}" class="btn btn-secondary">Batal</a>
                     </form>
-
                 </div>
             </div>
         </div>

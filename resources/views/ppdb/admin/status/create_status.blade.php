@@ -40,6 +40,7 @@
                                 <option value="verifikasi">Verifikasi</option>
                                 <option value="administrasi">Administrasi</option>
                                 <option value="lolos">Lolos</option>
+                                <option value="ditolak">Ditolak</option>
                             </select>
                         </div>
 

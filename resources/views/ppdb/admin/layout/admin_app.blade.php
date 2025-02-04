@@ -57,9 +57,10 @@
 
         @include('ppdb.admin.layout.sidebar')
 
+        {{-- yield content di dalem header --}}
         @include('ppdb.admin.layout.header')
 
-        @include('ppdb.admin.layout.customize')
+
     </div>
 
 
