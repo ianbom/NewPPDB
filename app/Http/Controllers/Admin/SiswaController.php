@@ -8,6 +8,7 @@ use App\Models\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Illuminate\Support\Facades\Hash;
 
 class SiswaController extends Controller
 {
@@ -37,6 +38,22 @@ class SiswaController extends Controller
         return response()->json(['err' => $th->getMessage()]);
     }
 }
+
+public function editPasswordSiswa( User $siswa){
+
+    return view('ppdb.admin.siswa.edit_password_siswa', ['siswa' => $siswa]);
+}
+
+    public function updatePasswordSiswa(Request $request, User $siswa){
+
+        $request->validate([
+            'password' => 'string',
+        ]);
+
+        $siswa->password = Hash::make($request->password);
+        $siswa->save();
+        return redirect()->route('siswa.show', $siswa->id)->with('success', 'Password berhasil diubah');
+    }
 
     public function generatePdf(Request $request){
 

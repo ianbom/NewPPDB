@@ -2,7 +2,7 @@
     <div class="main-header">
       <div class="main-header-logo">
         <!-- Logo Header -->
-        <div class="logo-header" data-background-color="dark">
+        <div class="logo-header" >
           <a href="index.html" class="logo">
             <img
               src="{{ asset('logo-None-iain-madura-f1a016af.jpg')}}"
@@ -350,7 +350,7 @@
                         <h4>{{ auth()->user()->name }}</h4>
                         <p class="text-muted">{{ auth()->user()->email }}</p>
                         <a
-                          href="profile.html"
+                          href="{{ route('profile') }}"
                           class="btn btn-xs btn-secondary btn-sm"
                           >View Profile</a
                         >

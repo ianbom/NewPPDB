@@ -12,6 +12,23 @@
     </div>
 
     <div class="row g-4">
+
+        @if (session('success'))
+        <div class="alert alert-info alert-dismissible alert-label-icon rounded-label fade show" role="alert">
+            <i class="ri-checkbox-circle-line label-icon"></i>
+            <strong>Sukses</strong> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if (session('error'))
+        <div class="alert alert-danger alert-dismissible alert-label-icon rounded-label fade show" role="alert">
+            <i class="ri-checkbox-circle-line label-icon"></i>
+            <strong>Error</strong> {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        
         <!-- Profile Card -->
         <div class="col-md-4">
             <div class="card border-0 shadow-sm">
@@ -62,6 +79,10 @@
                             <i class="bi bi-save me-2"></i>Simpan Perubahan
                         </button>
                     </form>
+
+                    <br>
+                    <a href="{{ route('siswa.editPassword', $siswa->id) }}" class="btn btn-secondary w-100"> Ubah Password</a>
+
                 </div>
             </div>
         </div>
@@ -106,8 +127,8 @@
                                                         <i class="bi bi-file-earmark-pdf me-2"></i>Lihat Berkas
                                                     </a>
                                                 @else
-                                                    <span class="text-success">
-                                                        <i class="bi bi-check-circle me-2"></i>{{ $jawabanSiswa->jawaban }}
+                                                    <span class="">
+                                                       {{ $jawabanSiswa->jawaban }}
                                                     </span>
                                                 @endif
                                             @else
@@ -126,4 +147,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+$(document).ready(function () {
+    $("#basic-datatables").DataTable({
+    });
+
+});
+
+</script>
 @endsection

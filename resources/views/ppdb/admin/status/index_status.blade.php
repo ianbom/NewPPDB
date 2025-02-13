@@ -40,6 +40,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
+
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">

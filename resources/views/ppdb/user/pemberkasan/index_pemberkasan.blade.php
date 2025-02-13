@@ -26,6 +26,21 @@
     </div>
 
     <div class="card">
+        @if (session('success'))
+        <div class="alert alert-info alert-dismissible alert-label-icon rounded-label fade show" role="alert">
+            <i class="ri-checkbox-circle-line label-icon"></i>
+            <strong>Sukses</strong> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if (session('error'))
+        <div class="alert alert-danger alert-dismissible alert-label-icon rounded-label fade show" role="alert">
+            <i class="ri-checkbox-circle-line label-icon"></i>
+            <strong>Error</strong> {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <div class="card-body">
             <div class="table-responsive">
                 <table id="basic-datatables" class="table table-bordered table-striped">

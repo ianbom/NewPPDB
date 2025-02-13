@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pertanyaan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -22,5 +24,11 @@ class DashboardController extends Controller
 
         // return response()->json(['totalUser' => $totalUser, 'userDitolak' => $userDitolak, 'userDiterima' => $userDiterima, 'userProses' => $userProses]);
          return view('ppdb.admin.pertanyaan.dashboard', ['totalUser' => $totalUser, 'userDitolak' => $userDitolak, 'userDiterima' => $userDiterima, 'userProses' => $userProses, 'userTerbaru' => $userTerbaru]);
+    }
+
+    public function profile(){
+        $profile = Auth::user();
+        $pertanyaan = Pertanyaan::all();
+        return view('ppdb.admin.profile.profile_admin', ['profile' => $profile, 'pertanyaan' => $pertanyaan]);
     }
 }

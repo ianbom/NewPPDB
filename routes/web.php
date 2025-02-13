@@ -26,15 +26,18 @@ Route::get('/home', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\ProfileController::class, 'index'])->name('home');
 
 
-Route::group(['prefix' => 'admin'], function () {
+Route::middleware(['is_admin'])->prefix('admin')->group(function () {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('pertanyaan', PertanyaanController::class);
     Route::resource('status', StatusController::class);
     Route::resource('siswa', SiswaController::class);
+    Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
     Route::get('generate/pdfSiswa', [SiswaController::class, 'generatePdf'])->name('siswa.genratePdf');
+    Route::get('siswa/editPassword/{siswa}', [SiswaController::class, 'editPasswordSiswa'])->name('siswa.editPassword');
+    Route::put('siswa/updatePassword/{siswa}', [SiswaController::class, 'updatePasswordSiswa'])->name('siswa.updatePassword');
     Route::post('bulk/update/siswa', [SiswaController::class, 'bulkUpdateStatus'])->name('siswa.bulkUpdateStatus');
 
 });

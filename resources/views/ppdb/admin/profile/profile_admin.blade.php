@@ -1,4 +1,4 @@
-@extends('ppdb.user.layout.user_app')
+@extends('ppdb.admin.layout.admin_app')
 
 @section('content')
 <div class="page-inner py-4" style="background: #f8f9fa;">
@@ -12,7 +12,7 @@
         </div>
 
         <div class="row">
-            
+
             @if (session('success'))
             <div class="alert alert-info alert-dismissible alert-label-icon rounded-label fade show" role="alert">
                 <i class="ri-checkbox-circle-line label-icon"></i>

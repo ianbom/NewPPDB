@@ -33,8 +33,10 @@ class LoginController extends Controller
      {
          if (Auth::user()->is_admin) {
              return '/admin/siswa';
+         } else{
+            return '/user/profile';
          }
-         return '/user/profile';
+
      }
 
     /**
