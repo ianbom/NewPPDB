@@ -45,7 +45,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Daftar Status</h4>
-                    <a href="{{ route('status.create') }}" class="btn btn-sm btn-info"> Buat Status</a>
+                    {{-- <a href="{{ route('status.create') }}" class="btn btn-sm btn-info"> Buat Status</a> --}}
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -70,13 +70,13 @@
                                         <a href="{{ route('status.edit', $s->id) }}" class="btn btn-warning btn-sm">
                                             <i class="bi bi-pencil"></i> Edit
                                         </a>
-                                        <form action="{{ route('status.destroy', $s->id) }}" method="POST" class="d-inline">
+                                        {{-- <form action="{{ route('status.destroy', $s->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">
                                                 <i class="bi bi-trash"></i> Hapus
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                                 @endforeach

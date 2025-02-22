@@ -53,14 +53,19 @@
                             <select name="status_id" class="form-select w-auto me-2" required>
                                 <option value="">Pilih Status</option>
                                 <option value="">Belum Verifikasi</option>
+
                                 @foreach($status as $st)
                                     <option value="{{ $st->id }}">{{ ucfirst($st->tipe) }}</option>
                                 @endforeach
+
                             </select>
                             <button type="submit" class="btn btn-danger btn-sm">
                                 <i class="bi bi-file-earmark-pdf"></i> Export PDF
                             </button>
                         </form>
+
+
+
                     </div>
 
                     <form id="bulkUpdateForm" action="{{ route('siswa.bulkUpdateStatus') }}" method="POST">
@@ -71,6 +76,7 @@
                                 @foreach($status as $st)
                                     <option value="{{ $st->id }}">{{ ucfirst($st->tipe) }}</option>
                                 @endforeach
+                                <option value="delete" class="text-danger"> Hapus </option>
                             </select>
                             <button type="submit" class="btn btn-sm btn-primary" onclick="return confirm('Apakah Anda yakin ingin mengubah status siswa yang dipilih?')">
                                 <i class="bi bi-arrow-repeat"></i> Update Status
@@ -99,10 +105,19 @@
                                         <td>{{ $s->email }}</td>
                                         <td>{{ $s->telp ?? '-' }}</td>
                                         <td>
-                                            <span class="badge text-white bg-info">
-                                                {{ ucfirst($s->status->tipe ?? 'Belum diverifikasi') }}
-                                            </span>
+                                            @if ($s->status && $s->status->tipe == 'verifikasi')
+                                                <span class="badge text-white bg-info">Verifikasi</span>
+                                            @elseif ($s->status && $s->status->tipe == 'administrasi')
+                                                <span class="badge text-white bg-primary">Administrasi</span>
+                                            @elseif ($s->status && $s->status->tipe == 'lolos')
+                                                <span class="badge text-white bg-success">Lulus</span>
+                                            @elseif ($s->status && $s->status->tipe == 'ditolak')
+                                                <span class="badge text-white bg-danger">Gagal</span>
+                                            @else
+                                                <span class="badge text-white bg-secondary">Belum Verifikasi</span>
+                                            @endif
                                         </td>
+
                                         <td>
                                             <a href="{{ route('siswa.show', $s->id) }}" class="btn btn-warning btn-sm">
                                                 <i class="bi bi-eye"></i> Detail
@@ -136,4 +151,6 @@ $(document).ready(function () {
 });
 
 </script>
+
+
 @endsection

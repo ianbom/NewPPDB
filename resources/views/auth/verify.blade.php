@@ -1,34 +1,4 @@
-{{-- @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-
-
- --}}
 
 
 
@@ -83,7 +53,7 @@
                 <div class="school-logo mb-4">
                     <img src="{{ asset('logo-None-iain-madura-f1a016af.jpg') }}" alt="School Logo" class="img-fluid">
                 </div>
-                <h1 class="text-white mb-3">PMB IAIN MADURAN</h1>
+                <h1 class="text-white mb-3">PPG IAIN MADURA</h1>
                 <p class="lead text-white">Tahun Ajaran 2025/2026</p>
                 <div class="school-features mt-5">
                     <div class="feature-item">

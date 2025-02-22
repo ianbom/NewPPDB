@@ -78,7 +78,7 @@
                 <div class="school-logo mb-4">
                     <img src="{{ asset('logo-None-iain-madura-f1a016af.jpg') }}" alt="School Logo" class="img-fluid">
                 </div>
-                <h1 class="text-white mb-3">PMB IAIN MADURAN</h1>
+                <h1 class="text-white mb-3">PPG IAIN MADURA</h1>
                 <p class="lead text-white">Tahun Ajaran 2025/2026</p>
                 <div class="school-features mt-5">
                     <div class="feature-item">

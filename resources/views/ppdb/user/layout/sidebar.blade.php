@@ -49,24 +49,13 @@
         <ul class="nav nav-secondary">
           <li class="nav-item">
             <a
-              data-bs-toggle="collapse"
-              href="#profile"
-              class="collapsed"
-              aria-expanded="false"
+             href="{{ route('profile.index') }}"
             >
               <i class="bi bi-person-square"></i>
-              <p>Profile</p>
-              <span class="caret"></span>
+              <p >Profile</p>
+
             </a>
-            <div class="collapse" id="profile">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="{{ route('profile.index') }}">
-                    <span class="sub-item">My Profile</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+
           </li>
           <li class="nav-section">
             <span class="sidebar-mini-icon">
@@ -76,37 +65,19 @@
           </li>
 
           <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#pemberkasan">
+            <a href="{{ route('pemberkasan.index') }}">
                 <i class="bi bi-file-text-fill"></i>
               <p>Pemberkasan</p>
-              <span class="caret"></span>
+
             </a>
-            <div class="collapse" id="pemberkasan">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="{{ route('pemberkasan.index') }}">
-                    <span class="sub-item">Tambahkan Berkas</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
           </li>
 
           <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#pengumuman">
+            <a href="{{ route('pengumuman.index') }}">
                 <i class="bi bi-megaphone-fill"></i>
               <p>Pengumuman</p>
-              <span class="caret"></span>
+             
             </a>
-            <div class="collapse" id="pengumuman">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="{{ route('pengumuman.index') }}">
-                    <span class="sub-item">Lihat Pengumuman</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
           </li>
         </ul>
       </div>

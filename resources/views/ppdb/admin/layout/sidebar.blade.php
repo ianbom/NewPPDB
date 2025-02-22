@@ -128,11 +128,11 @@
                   </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a href="{{ route('status.create') }}">
                       <span class="sub-item">Create</span>
                     </a>
-                  </li>
+                </li> --}}
               </ul>
             </div>
           </li>

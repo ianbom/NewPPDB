@@ -23,21 +23,35 @@ class SiswaController extends Controller
     }
 
     public function bulkUpdateStatus(Request $request)
-{
-    try {
-        $request->validate([
-            'selected_ids' => 'required|array',
-            'selected_ids.*' => 'exists:users,id',
-            'status_id' => 'required|exists:status,id',
-        ]);
+    {
+        try {
+            $request->validate([
+                'selected_ids' => 'required|array',
+                'selected_ids.*' => 'exists:users,id',
+                'status_id' => 'required|string', // Changed to string to accept 'delete'
+            ]);
 
-        User::whereIn('id', $request->selected_ids)->update(['status_id' => $request->status_id]);
+            if ($request->status_id === 'delete') {
+                // Handle bulk delete
+                User::whereIn('id', $request->selected_ids)->delete();
+                return redirect()->back()->with('success', 'Siswa yang dipilih berhasil dihapus');
+            }
 
-        return redirect()->back()->with('success', 'Status siswa berhasil diperbarui');
-    } catch (\Throwable $th) {
-        return response()->json(['err' => $th->getMessage()]);
+            // Validate status_id only for update operation
+            if (!in_array($request->status_id, ['delete'])) {
+                $request->validate([
+                    'status_id' => 'exists:status,id',
+                ]);
+
+                // Handle status update
+                User::whereIn('id', $request->selected_ids)->update(['status_id' => $request->status_id]);
+                return redirect()->back()->with('success', 'Status siswa berhasil diperbarui');
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
-}
 
 public function editPasswordSiswa( User $siswa){
 
@@ -98,16 +112,32 @@ public function editPasswordSiswa( User $siswa){
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    public function bulkDelete(Request $request)
+{
+    try {
+        $request->validate([
+            'selected_ids' => 'required|array',
+            'selected_ids.*' => 'exists:users,id',
+            'status_id' => 'required|exists:status,id',
+        ]);
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+        if (!$request->selected_ids) {
+            return redirect()->back()->with('error', 'Tidak ada siswa yang dipilih.');
+        } else{
+
+        User::whereIn('id', $request->selected_ids)->delete();
+        return redirect()->back()->with('success', 'Siswa berhasil dihapus.');
+        }
+    } catch (\Throwable $th) {
+       return response()->json(['error' => $th->getMessage()]);
+    }
+
+}
+
+    public function destroy(User $siswa)
     {
-        //
+        $siswa->delete();
+        return redirect()->route('siswa.index')->with('success', 'Siswa berhasil dihapus');
     }
 }

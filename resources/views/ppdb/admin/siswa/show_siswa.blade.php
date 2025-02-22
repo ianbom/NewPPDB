@@ -28,7 +28,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        
+
         <!-- Profile Card -->
         <div class="col-md-4">
             <div class="card border-0 shadow-sm">
@@ -82,7 +82,15 @@
 
                     <br>
                     <a href="{{ route('siswa.editPassword', $siswa->id) }}" class="btn btn-secondary w-100"> Ubah Password</a>
-
+                    <br>
+                    <br>
+                    <form action="{{ route('siswa.destroy', $siswa->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger w-100" onclick="return confirm('Apakah Anda yakin ingin mengahpus siswa ini')">
+                            <i class="bi bi-trash-fill me-2"></i> Hapus Siswa
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

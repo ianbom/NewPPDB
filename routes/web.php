@@ -39,6 +39,8 @@ Route::middleware(['is_admin'])->prefix('admin')->group(function () {
     Route::get('siswa/editPassword/{siswa}', [SiswaController::class, 'editPasswordSiswa'])->name('siswa.editPassword');
     Route::put('siswa/updatePassword/{siswa}', [SiswaController::class, 'updatePasswordSiswa'])->name('siswa.updatePassword');
     Route::post('bulk/update/siswa', [SiswaController::class, 'bulkUpdateStatus'])->name('siswa.bulkUpdateStatus');
+    Route::delete('/bulk-delete', [SiswaController::class, 'bulkDelete'])->name('siswa.bulkDelete');
+
 
 });
 
